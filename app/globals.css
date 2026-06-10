@@ -1,0 +1,195 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ----------------------------------------------------------------------------
+   Design tokens — see DESIGN.md. OKLCH throughout.
+   The site chrome is a quiet white "gallery wall"; saturated color comes from
+   the backgrounds on display plus one cobalt primary + one warm coral accent.
+---------------------------------------------------------------------------- */
+:root {
+  --bg: oklch(1 0 0);
+  --surface: oklch(0.976 0.003 256);
+  --surface-2: oklch(0.955 0.004 256);
+  --border: oklch(0.916 0.005 256);
+  --ink: oklch(0.21 0.02 256);
+  --muted: oklch(0.52 0.018 256);
+
+  --primary: oklch(0.55 0.18 256);
+  --primary-hover: oklch(0.49 0.18 256);
+  --primary-ink: oklch(0.99 0.01 256);
+
+  --accent: oklch(0.7 0.17 38);
+  --accent-ink: oklch(0.99 0.01 38);
+
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  --shadow-card: 0 1px 2px oklch(0.21 0.02 256 / 0.04),
+    0 4px 16px oklch(0.21 0.02 256 / 0.06);
+  --shadow-lift: 0 2px 4px oklch(0.21 0.02 256 / 0.06),
+    0 14px 40px oklch(0.21 0.02 256 / 0.12);
+  --shadow-float: 0 8px 40px oklch(0.21 0.02 256 / 0.18);
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Chrome tokens — flipped by [data-theme="dark"] so the nav, cards readout,
+     and preview bar stay legible over a dark applied background. */
+  --chrome-ink: var(--ink);
+  --chrome-muted: var(--muted);
+  --chrome-surface: oklch(1 0 0 / 0.72);
+  --chrome-border: var(--border);
+
+  /* ── shadcn bridge ─────────────────────────────────────────────────────────
+     shadcn components are styled with Tailwind color utilities (bg-popover,
+     text-muted-foreground, …) that resolve to the --color-* theme entries below.
+     We point those at Backdrop's own palette so every shadcn surface is born in
+     Backdrop. The `--sd-*` tokens are the overlay surfaces (command palette,
+     dialog, tooltip, toast); they FLIP under [data-theme="dark"] so the floating
+     UI stays cohesive with the chrome when a dark background is applied.
+     NB: shadcn's "accent" is a subtle hover surface — NOT Backdrop's coral. */
+  --sd-card: oklch(1 0 0);
+  --sd-card-foreground: var(--ink);
+  --sd-popover: oklch(1 0 0);
+  --sd-popover-foreground: var(--ink);
+  --sd-secondary: var(--surface-2);
+  --sd-secondary-foreground: var(--ink);
+  --sd-muted: var(--surface-2);
+  --sd-muted-foreground: var(--muted);
+  --sd-accent: var(--surface-2);
+  --sd-accent-foreground: var(--ink);
+  --sd-destructive: oklch(0.58 0.22 25);
+  --sd-destructive-foreground: oklch(0.99 0.01 25);
+  --sd-border: var(--border);
+  --sd-input: var(--border);
+  --sd-ring: var(--primary);
+}
+
+/* When a dark background is applied site-wide, flip the floating chrome. */
+[data-theme="dark"] {
+  --chrome-ink: oklch(0.98 0 0);
+  --chrome-muted: oklch(0.78 0.01 256);
+  --chrome-surface: oklch(0.22 0.02 256 / 0.66);
+  --chrome-border: oklch(1 0 0 / 0.16);
+
+  /* Flip the shadcn overlay surfaces to a deep cobalt-ink so the command
+     palette, dialog, tooltip, and toasts cohere with the dark chrome. */
+  --sd-card: oklch(0.24 0.02 256);
+  --sd-card-foreground: oklch(0.98 0 0);
+  --sd-popover: oklch(0.225 0.022 256);
+  --sd-popover-foreground: oklch(0.98 0 0);
+  --sd-secondary: oklch(0.3 0.02 256);
+  --sd-secondary-foreground: oklch(0.98 0 0);
+  --sd-muted: oklch(0.3 0.02 256);
+  --sd-muted-foreground: oklch(0.74 0.02 256);
+  --sd-accent: oklch(0.34 0.025 256);
+  --sd-accent-foreground: oklch(0.99 0 0);
+  --sd-border: oklch(1 0 0 / 0.1);
+  --sd-input: oklch(1 0 0 / 0.16);
+  --sd-ring: oklch(0.65 0.16 256);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-ink: var(--primary-ink);
+  /* NB: --color-border / --color-muted / --color-accent are defined further
+     down with shadcn semantics. Backdrop's own coral + muted-text live on the
+     bare --accent / --muted custom properties, consumed via inline styles. */
+
+  --color-chrome-ink: var(--chrome-ink);
+  --color-chrome-muted: var(--chrome-muted);
+  --color-chrome-surface: var(--chrome-surface);
+  --color-chrome-border: var(--chrome-border);
+
+  --radius-sm: 8px;
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: 24px;
+  --radius-full: var(--radius-full);
+
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  /* shadcn color tokens → Backdrop palette (see the bridge note in :root). */
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-card: var(--sd-card);
+  --color-card-foreground: var(--sd-card-foreground);
+  --color-popover: var(--sd-popover);
+  --color-popover-foreground: var(--sd-popover-foreground);
+  --color-primary-foreground: var(--primary-ink);
+  --color-secondary: var(--sd-secondary);
+  --color-secondary-foreground: var(--sd-secondary-foreground);
+  --color-muted: var(--sd-muted);
+  --color-muted-foreground: var(--sd-muted-foreground);
+  --color-accent: var(--sd-accent);
+  --color-accent-foreground: var(--sd-accent-foreground);
+  --color-destructive: var(--sd-destructive);
+  --color-destructive-foreground: var(--sd-destructive-foreground);
+  --color-border: var(--sd-border);
+  --color-input: var(--sd-input);
+  --color-ring: var(--sd-ring);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Base canvas; the SiteBackdrop (fixed, z-index -1) paints over this and
+     swaps in the active background. Body stays transparent so it shows. */
+  background: var(--bg);
+}
+
+body {
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
