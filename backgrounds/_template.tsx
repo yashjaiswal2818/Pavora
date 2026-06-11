@@ -1,15 +1,7 @@
-/* ============================================================================
-   BACKGROUND TEMPLATE — copy this file to create a new background.
-   ----------------------------------------------------------------------------
-   1. Copy this file to `backgrounds/<your-slug>.tsx` (e.g. "midnight-haze.tsx").
-   2. Fill in `meta`, build the `Background` component, and write the `code`
-      string (the exact code the Copy button gives people).
-   3. Register it: add one line to `backgrounds/index.ts`.
-   That's the whole contribution. See CONTRIBUTING.md for the full walkthrough.
-
-   This file is NOT shown on the site — it's only a reference. It is kept valid
-   and self-contained so you can see a working example.
-============================================================================ */
+/* Background template — copy this to backgrounds/<your-slug>.tsx to start a new
+   one. Fill in `meta`, build the `Background` component, and write the `code`
+   string people copy, then register it in backgrounds/index.ts. This file isn't
+   shown on the site; it's a working reference. See CONTRIBUTING.md. */
 
 "use client";
 
@@ -21,11 +13,7 @@ export const meta: BackgroundMeta = {
   name: "Template",
   category: "Gradients", // "Gradients" | "Mesh" | "Patterns" | "Particles"
   tech: "css", // "css" for pure CSS, "js" for canvas/JS effects
-  animated: true, // does it move?
   isDark: true, // true if the background is dark (flips the site UI to light)
-  author: "your-name",
-  github: "https://github.com/your-username",
-  tags: ["example", "gradient"],
 };
 
 // 2) COMPONENT — must fill its container (the card preview AND the full page).

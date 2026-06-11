@@ -4,7 +4,6 @@ import "./globals.css";
 import { BackgroundProvider } from "@/components/BackgroundProvider";
 import { CodeDialogProvider } from "@/components/CodeDialog";
 import { SiteBackdrop } from "@/components/SiteBackdrop";
-import { Nav } from "@/components/Nav";
 import { PreviewBar } from "@/components/PreviewBar";
 import { CommandPalette } from "@/components/CommandPalette";
 import { Toaster } from "@/components/ui/sonner";
@@ -28,7 +27,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Backdrop — copy-paste UI backgrounds",
+  title: "Motif — copy-paste UI backgrounds",
   description:
     "A free, open-source library of CSS and JS backgrounds. Preview any one across the whole page, then copy the code.",
 };
@@ -45,7 +44,6 @@ export default function RootLayout({
         <BackgroundProvider>
           <CodeDialogProvider>
             <SiteBackdrop />
-            <Nav />
             <main>{children}</main>
             <PreviewBar />
             <CommandPalette />

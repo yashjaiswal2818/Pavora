@@ -1,11 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* ----------------------------------------------------------------------------
-   Design tokens — see DESIGN.md. OKLCH throughout.
-   The site chrome is a quiet white "gallery wall"; saturated color comes from
-   the backgrounds on display plus one cobalt primary + one warm coral accent.
----------------------------------------------------------------------------- */
+/* Design tokens, OKLCH throughout. The chrome is a quiet white "gallery wall";
+   saturated color comes from the backgrounds, plus one cobalt primary and one
+   warm coral accent. */
 :root {
   --bg: oklch(1 0 0);
   --surface: oklch(0.976 0.003 256);
@@ -41,14 +39,12 @@
   --chrome-surface: oklch(1 0 0 / 0.72);
   --chrome-border: var(--border);
 
-  /* ── shadcn bridge ─────────────────────────────────────────────────────────
-     shadcn components are styled with Tailwind color utilities (bg-popover,
-     text-muted-foreground, …) that resolve to the --color-* theme entries below.
-     We point those at Backdrop's own palette so every shadcn surface is born in
-     Backdrop. The `--sd-*` tokens are the overlay surfaces (command palette,
-     dialog, tooltip, toast); they FLIP under [data-theme="dark"] so the floating
-     UI stays cohesive with the chrome when a dark background is applied.
-     NB: shadcn's "accent" is a subtle hover surface — NOT Backdrop's coral. */
+  /* shadcn bridge: shadcn utilities (bg-popover, text-muted-foreground, …)
+     resolve to the --color-* entries below, which we point at the palette above
+     so every shadcn surface matches the site. The --sd-* tokens are the overlay
+     surfaces (command palette, dialog, tooltip, toast) and flip under
+     [data-theme="dark"] so floating UI stays readable over a dark background.
+     Note: shadcn's "accent" is a subtle hover surface, not the coral. */
   --sd-card: oklch(1 0 0);
   --sd-card-foreground: var(--ink);
   --sd-popover: oklch(1 0 0);
@@ -99,7 +95,7 @@
   --color-primary-hover: var(--primary-hover);
   --color-primary-ink: var(--primary-ink);
   /* NB: --color-border / --color-muted / --color-accent are defined further
-     down with shadcn semantics. Backdrop's own coral + muted-text live on the
+     down with shadcn semantics. Motif's own coral + muted-text live on the
      bare --accent / --muted custom properties, consumed via inline styles. */
 
   --color-chrome-ink: var(--chrome-ink);
@@ -117,7 +113,7 @@
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
-  /* shadcn color tokens → Backdrop palette (see the bridge note in :root). */
+  /* shadcn color tokens → Motif palette (see the bridge note in :root). */
   --color-background: var(--bg);
   --color-foreground: var(--ink);
   --color-card: var(--sd-card);

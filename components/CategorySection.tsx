@@ -1,21 +1,28 @@
 "use client";
 
-import type { BackgroundModule, Category } from "@/backgrounds/types";
+import type { BackgroundModule } from "@/backgrounds/types";
 import { BackgroundCard } from "./BackgroundCard";
 
+/**
+ * A grid of background cards, optionally headed by a title + count.
+ * The "All" tab renders one untitled section with every background; the
+ * category tabs render one titled section each.
+ */
 export function CategorySection({
-  category,
+  title,
   items,
 }: {
-  category: Category;
+  title?: string;
   items: BackgroundModule[];
 }) {
   return (
-    <section className="section" id={category.toLowerCase()}>
-      <div className="section__head">
-        <h2 className="section__title">{category}</h2>
-        <span className="section__count">{items.length}</span>
-      </div>
+    <section className="section" id={title?.toLowerCase()}>
+      {title ? (
+        <div className="section__head">
+          <h2 className="section__title">{title}</h2>
+          <span className="section__count">{items.length}</span>
+        </div>
+      ) : null}
       <div className="section__grid">
         {items.map((module) => (
           <BackgroundCard key={module.meta.slug} module={module} />
@@ -52,8 +59,14 @@ export function CategorySection({
         }
         .section__grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: clamp(1rem, 2.5vw, 1.5rem);
+          grid-template-columns: 1fr;
+          gap: clamp(0.9rem, 2vw, 1.25rem);
+        }
+        @media (min-width: 560px) {
+          .section__grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+          .section__grid { grid-template-columns: repeat(4, 1fr); }
         }
       `}</style>
     </section>

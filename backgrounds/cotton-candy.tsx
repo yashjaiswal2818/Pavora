@@ -7,11 +7,7 @@ export const meta: BackgroundMeta = {
   name: "Cotton Candy",
   category: "Mesh",
   tech: "css",
-  animated: true,
   isDark: false,
-  author: "your-username",
-  github: "https://github.com/your-username",
-  tags: ["pastel", "light", "soft"],
 };
 
 export function Background({ playing = true, className }: BackgroundProps) {

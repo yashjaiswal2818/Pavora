@@ -18,7 +18,7 @@ import {
 /**
  * ⌘K / Ctrl+K command palette. Fuzzy-search every background and apply it
  * site-wide, or run a quick action. Opens on the keyboard shortcut or on a
- * `backdrop:command` window event (dispatched by the nav search button).
+ * `motif:command` window event (dispatched by the hero search button).
  */
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
@@ -36,10 +36,10 @@ export function CommandPalette() {
       setOpen(true);
     }
     window.addEventListener("keydown", onKey);
-    window.addEventListener("backdrop:command", onOpenEvent);
+    window.addEventListener("motif:command", onOpenEvent);
     return () => {
       window.removeEventListener("keydown", onKey);
-      window.removeEventListener("backdrop:command", onOpenEvent);
+      window.removeEventListener("motif:command", onOpenEvent);
     };
   }, []);
 
@@ -107,10 +107,6 @@ export function CommandPalette() {
                   )}
                 </span>
                 {module.meta.name}
-                <CommandShortcut>
-                  {module.meta.tech === "css" ? "CSS" : "JS"}
-                  {module.meta.isDark ? " · dark" : ""}
-                </CommandShortcut>
               </CommandItem>
             ))}
           </CommandGroup>

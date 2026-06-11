@@ -2,20 +2,26 @@
 
 import { useState } from "react";
 import { byCategory } from "@/backgrounds";
+import type { BackgroundModule } from "@/backgrounds/types";
 import { CategorySection } from "./CategorySection";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 /**
  * Client-side gallery. Resolving the registry here (rather than in the server
  * page) keeps the background modules entirely on the client, so component
- * references never cross the server→client boundary. A Tabs control filters the
- * visible categories; "All" shows every section.
+ * references never cross the server→client boundary. A Tabs control filters
+ * the gallery; "All" shows every background in one unified grid, a category
+ * tab shows that category's titled section.
  */
 export function Gallery() {
   const groups = byCategory();
   const [filter, setFilter] = useState<string>("all");
-  const visible =
-    filter === "all" ? groups : groups.filter((g) => g.category === filter);
+  const visible: { title?: string; items: BackgroundModule[] }[] =
+    filter === "all"
+      ? [{ items: groups.flatMap((g) => g.items) }]
+      : groups
+          .filter((g) => g.category === filter)
+          .map((g) => ({ title: g.category, items: g.items }));
 
   return (
     <>
@@ -34,8 +40,8 @@ export function Gallery() {
 
       {visible.map((group) => (
         <CategorySection
-          key={group.category}
-          category={group.category}
+          key={group.title ?? "all"}
+          title={group.title}
           items={group.items}
         />
       ))}

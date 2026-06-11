@@ -1,17 +1,35 @@
-# Contributing to Backdrop
+# Contributing
 
-Thanks for being here! The main way to contribute is **adding a background** — it's one file plus one import line, and your name + GitHub link appear on the card. A perfect first open-source PR.
+The main way to contribute is **adding a background** — one new file and one import line. It makes a great first open-source PR.
 
-## Add a background (the 10-minute walkthrough)
+## Project structure
 
-### 1. Fork & set up
+```
+app/
+  layout.tsx     providers, fonts, and the global chrome (nav, preview bar, ⌘K palette)
+  page.tsx       hero + the gallery
+  globals.css    OKLCH design tokens — the single source for color, spacing, radius
+backgrounds/
+  types.ts       the BackgroundMeta / BackgroundModule contract
+  index.ts       the registry: every background is imported and listed here
+  _template.tsx  copy this to start a new background
+  <slug>.tsx     one file per background — meta + Background + code
+components/       the gallery UI (cards, sections, providers, palette)
+  ui/             shadcn primitives, themed to the tokens in globals.css
+lib/              small helpers (clipboard, site config)
+```
+
+The site renders straight from `backgrounds/index.ts`, so a new background is a one-line diff there plus your file. That's what keeps PRs easy to review.
+
+## Add a background
+
+### 1. Set up
 
 ```bash
-# fork on GitHub, then:
-git clone https://github.com/<your-username>/backdrop
-cd backdrop
+git clone https://github.com/<you>/motif
+cd motif
 npm install
-npm run dev   # http://localhost:3000
+npm run dev        # http://localhost:3000
 ```
 
 ### 2. Copy the template
@@ -20,79 +38,60 @@ npm run dev   # http://localhost:3000
 cp backgrounds/_template.tsx backgrounds/<your-slug>.tsx
 ```
 
-Pick a short, kebab-case slug (e.g. `midnight-haze`). The slug must match the filename.
+Use a short, kebab-case slug (e.g. `midnight-haze`) that matches the filename.
 
-### 3. Fill in the 3 exports
+### 3. Fill in the three exports
 
-Every background module exports exactly three things (see [backgrounds/types.ts](backgrounds/types.ts)):
+Each file exports `meta`, a `Background` component, and a `code` string (see [backgrounds/types.ts](backgrounds/types.ts)).
 
-1. **`meta`** — describes your background to the gallery:
-   - `slug` — must equal the filename (without `.tsx`) and be unique
-   - `name` — display name, e.g. "Midnight Haze"
-   - `category` — `"Gradients" | "Mesh" | "Patterns" | "Particles"`
-   - `tech` — `"css"` for pure CSS, `"js"` for canvas/JS effects
-   - `animated` — does it move?
-   - `isDark` — `true` flips the site chrome to light when applied full-page
-   - `author` + `github` — your credit on the card
-   - `tags` — a few descriptive words
+**`meta`**
 
-2. **`Background`** — a React component that fills its container (`position: absolute; inset: 0`). Rules:
-   - Accept `playing` and pause animations when it's `false` (the grid pauses cards until hover). Static backgrounds can ignore it.
-   - Keep styles self-contained; prefix class and keyframe names with your slug so backgrounds never collide.
-   - **Reduced motion is mandatory**: every animation needs a `@media (prefers-reduced-motion: reduce)` fallback (static frame is fine).
+- `slug` — matches the filename, unique
+- `name` — display name, e.g. "Midnight Haze"
+- `category` — `Gradients` · `Mesh` · `Patterns` · `Particles`
+- `tech` — `"css"` or `"js"` (canvas/JS effects)
+- `isDark` — `true` if the background is dark, so the chrome flips to stay readable over it
 
-3. **`code`** — the exact snippet the Copy button gives people. It must be **self-contained and paste-ready**: no imports from this repo. A single CSS class is the simplest shape; component code is fine for JS effects.
+**`Background`** — a component that fills its container (`position: absolute; inset: 0`).
 
-### 4. Register it (one line, well, two)
+- Accept `playing` and pause animation when it's `false` — cards stay paused until hover. Static backgrounds can ignore it.
+- Keep styles self-contained, and prefix class and keyframe names with your slug so nothing collides.
+- Give every animation a `@media (prefers-reduced-motion: reduce)` fallback.
 
-In [backgrounds/index.ts](backgrounds/index.ts):
+**`code`** — the exact snippet people copy. It must be self-contained and paste-ready, with no imports from this repo. A single CSS class is the simplest shape; a small component is fine for JS effects.
+
+### 4. Register it
+
+Add one import and one array entry in [backgrounds/index.ts](backgrounds/index.ts):
 
 ```ts
 import * as midnightHaze from "./midnight-haze";
 
-const modules: BackgroundModule[] = [
-  // ...existing entries
+const modules = [
+  // ...existing
   midnightHaze,
 ];
 ```
 
-Order within a category = order on the page.
+Order within a category is the order on the page.
 
 ### 5. Check it
 
-- `npx tsc --noEmit` passes
-- `npm run lint` passes
-- In the browser: the card plays on hover, clicking applies it full-page, `Esc` resets, Copy gives working code
-- If `isDark: true`, confirm the nav/preview bar flip to light and stay readable
-- Animations stop under reduced motion (toggle it in DevTools → Rendering → Emulate CSS `prefers-reduced-motion`)
+- `npx tsc --noEmit` and `npm run lint` pass
+- The card plays on hover, clicking applies it full-page, `Esc` resets, and Copy gives working code
+- If `isDark`, the nav and preview bar stay readable over it
+- Animation stops under reduced motion (DevTools → Rendering → Emulate `prefers-reduced-motion`)
 
 ### 6. Open a PR
 
-One background per PR, please. Include a screenshot or short clip of the background in the PR description.
+One background per PR. A screenshot or short clip in the description helps a lot.
 
-## What we look for in review
+## Design tokens
 
-- The background looks great at **full-page scale**, not just in a thumbnail (that's the whole product).
-- The copied code works when pasted into a fresh project.
-- Reduced-motion fallback exists.
-- Reasonable performance: no layout thrash; canvas effects use `requestAnimationFrame` and stop when `playing` is `false`.
+Color, spacing, radius, and shadows live as OKLCH custom properties in [app/globals.css](app/globals.css). Use them (`var(--surface)`, `var(--radius-lg)`, …) instead of hard-coded values so the UI stays consistent. Backgrounds are the exception — they own their own color and are self-contained by design.
 
-## Reviewing / testing someone's PR locally
+## Bigger changes
 
-```bash
-gh pr checkout <number>
-npm install
-npm run dev
-```
+Bug fixes, accessibility improvements, and docs are all welcome. For anything larger than a background — new UI, a new category, a feature — open an issue first so we can talk it through.
 
-Try the full flow: hover → preview full-page → copy → Esc.
-
-## Other contributions
-
-Bug fixes, accessibility improvements, and docs are all welcome. For anything bigger than a background (new UI, new category, new feature), open an issue first so we can talk it through.
-
-## House rules
-
-- Be kind; this is a beginner-friendly repo.
-- Match the existing code style (TypeScript, self-contained styles, design tokens in `app/globals.css`).
-- By contributing you agree your work is released under the [MIT License](LICENSE).
+By contributing, you agree your work is released under the [MIT License](LICENSE).

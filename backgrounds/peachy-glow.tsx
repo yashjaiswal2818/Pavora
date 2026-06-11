@@ -7,11 +7,7 @@ export const meta: BackgroundMeta = {
   name: "Peachy Glow",
   category: "Gradients",
   tech: "css",
-  animated: true,
   isDark: false,
-  author: "your-username",
-  github: "https://github.com/your-username",
-  tags: ["light", "warm", "soft"],
 };
 
 export function Background({ playing = true, className }: BackgroundProps) {

@@ -8,11 +8,7 @@ export const meta: BackgroundMeta = {
   name: "Constellation",
   category: "Particles",
   tech: "js",
-  animated: true,
   isDark: true,
-  author: "your-username",
-  github: "https://github.com/your-username",
-  tags: ["particles", "network", "dark"],
 };
 
 export function Background({ playing = true }: BackgroundProps) {

@@ -7,11 +7,7 @@ export const meta: BackgroundMeta = {
   name: "Sunset Drift",
   category: "Gradients",
   tech: "css",
-  animated: true,
   isDark: true,
-  author: "your-username",
-  github: "https://github.com/your-username",
-  tags: ["warm", "sunset", "gradient"],
 };
 
 export function Background({ playing = true, className }: BackgroundProps) {

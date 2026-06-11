@@ -4,6 +4,11 @@ import { useState } from "react";
 import type { BackgroundModule } from "@/backgrounds/types";
 import { useBackground } from "./BackgroundProvider";
 import { useCodeDialog } from "./CodeDialog";
+import {
+  MinimalCard,
+  MinimalCardMedia,
+  MinimalCardTitle,
+} from "@/components/ui/minimal-card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { CopyIcon, EyeIcon } from "./icons";
 
@@ -14,7 +19,7 @@ export function BackgroundCard({ module }: { module: BackgroundModule }) {
   const [engaged, setEngaged] = useState(false);
 
   return (
-    <article
+    <MinimalCard
       className="card"
       onMouseEnter={() => setEngaged(true)}
       onMouseLeave={() => setEngaged(false)}
@@ -23,7 +28,7 @@ export function BackgroundCard({ module }: { module: BackgroundModule }) {
         if (!e.currentTarget.contains(e.relatedTarget as Node)) setEngaged(false);
       }}
     >
-      <div className="card__media">
+      <MinimalCardMedia className="card__media aspect-[4/3]">
         <button
           type="button"
           className="card__preview"
@@ -36,11 +41,6 @@ export function BackgroundCard({ module }: { module: BackgroundModule }) {
             Preview
           </span>
         </button>
-
-        <div className="card__badges" aria-hidden>
-          <span className="badge">{meta.tech === "css" ? "CSS" : "JS"}</span>
-          {meta.animated ? <span className="badge">Animated</span> : null}
-        </div>
 
         <Tooltip>
           <TooltipTrigger asChild>
@@ -55,40 +55,18 @@ export function BackgroundCard({ module }: { module: BackgroundModule }) {
           </TooltipTrigger>
           <TooltipContent>View &amp; copy code</TooltipContent>
         </Tooltip>
-      </div>
+      </MinimalCardMedia>
 
-      <div className="card__meta">
-        <h3 className="card__name">{meta.name}</h3>
-        <a
-          className="card__author"
-          href={meta.github}
-          target="_blank"
-          rel="noreferrer"
-        >
-          by {meta.author}
-        </a>
-      </div>
+      <MinimalCardTitle className="pb-1">{meta.name}</MinimalCardTitle>
 
       <style>{`
         .card {
-          display: flex;
-          flex-direction: column;
-          background: var(--surface);
-          border: 1px solid var(--border);
-          border-radius: var(--radius-lg);
-          overflow: hidden;
-          box-shadow: var(--shadow-card);
           transition: transform 0.2s var(--ease-out-quart),
             box-shadow 0.2s var(--ease-out-quart);
         }
         .card:hover {
           transform: translateY(-4px);
           box-shadow: var(--shadow-lift);
-        }
-        .card__media {
-          position: relative;
-          aspect-ratio: 4 / 3;
-          overflow: hidden;
         }
         .card__preview {
           position: absolute;
@@ -125,25 +103,6 @@ export function BackgroundCard({ module }: { module: BackgroundModule }) {
           opacity: 1;
           transform: translateY(0);
         }
-        .card__badges {
-          position: absolute;
-          top: 0.6rem;
-          left: 0.6rem;
-          display: flex;
-          gap: 0.35rem;
-          pointer-events: none;
-          z-index: 1;
-        }
-        .badge {
-          padding: 0.2rem 0.55rem;
-          border-radius: var(--radius-full);
-          background: oklch(1 0 0 / 0.92);
-          color: var(--ink);
-          font-size: 0.7rem;
-          font-weight: 600;
-          letter-spacing: 0.01em;
-          box-shadow: var(--shadow-card);
-        }
         .card__copy {
           position: absolute;
           top: 0.6rem;
@@ -171,32 +130,11 @@ export function BackgroundCard({ module }: { module: BackgroundModule }) {
           transform: translateY(0);
         }
         .card__copy:hover { background: oklch(1 0 0); color: var(--primary); }
-        .card__meta {
-          display: flex;
-          align-items: baseline;
-          justify-content: space-between;
-          gap: 0.75rem;
-          padding: 0.85rem 1rem;
-        }
-        .card__name {
-          font-family: var(--font-display);
-          font-size: 1rem;
-          font-weight: 700;
-          color: var(--ink);
-          letter-spacing: -0.02em;
-        }
-        .card__author {
-          font-size: 0.8rem;
-          color: var(--muted);
-          text-decoration: none;
-          white-space: nowrap;
-          transition: color 0.15s var(--ease-out-quart);
-        }
-        .card__author:hover { color: var(--primary); }
         @media (prefers-reduced-motion: reduce) {
           .card, .card__hint, .card__copy { transition: none; }
+          .card:hover { transform: none; }
         }
       `}</style>
-    </article>
+    </MinimalCard>
   );
 }

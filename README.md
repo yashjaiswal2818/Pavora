@@ -1,21 +1,21 @@
-# Backdrop
+# Motif
 
 **Copy-paste UI backgrounds.** A free, open-source gallery of CSS and JS/canvas backgrounds for landing pages, portfolios, and apps. Preview any background across the *entire site* with one click, then copy the code and ship it.
 
-![Backdrop — copy-paste UI backgrounds](.github/screenshot.png)
+![Motif — copy-paste UI backgrounds](.github/screenshot.png)
 
-## Why Backdrop
+## Why Motif
 
 - **Feel it at full scale.** Click any card and the background applies to the whole page — you experience it as a real environment, not a thumbnail. Press `Esc` (or the floating bar) to come back.
 - **Copy in seconds.** Every background ships as a self-contained, paste-ready snippet — no imports, no setup.
 - **Accessible by default.** Every animated background has a `prefers-reduced-motion` fallback, and the UI auto-flips for contrast when a dark background is applied.
-- **Built to be contributed to.** A background is one file plus one import line. Your name and GitHub link appear on the card.
+- **Built to be contributed to.** A background is one self-contained file plus one import line — an easy, satisfying open-source PR.
 
 ## Run it locally
 
 ```bash
 git clone <repo-url>
-cd backdrop
+cd motif
 npm install
 npm run dev
 ```

@@ -1,37 +1,29 @@
 import type { ComponentType } from "react";
 
-/** The category a background is grouped under on the gallery page. */
+/** The category a background is grouped under in the gallery. */
 export type Category = "Gradients" | "Mesh" | "Patterns" | "Particles";
 
 /** How the background is built — pure CSS or a JS/canvas effect. */
 export type Tech = "css" | "js";
 
 export interface BackgroundMeta {
-  /** URL-safe unique id. Must match the filename, e.g. "aurora-veil". */
+  /** URL-safe unique id. Matches the filename, e.g. "aurora-veil". */
   slug: string;
-  /** Human-friendly display name, e.g. "Aurora Veil". */
+  /** Display name, e.g. "Aurora Veil". */
   name: string;
   category: Category;
   tech: Tech;
-  /** Does it move? Drives the "Animated" badge and reduced-motion handling. */
-  animated: boolean;
   /**
    * Is the background dark? When applied full-page, dark backgrounds flip the
-   * site chrome (nav, preview bar) to light so it stays readable.
+   * site chrome to light so it stays readable.
    */
   isDark: boolean;
-  /** Contributor's display name, shown as credit on the card. */
-  author: string;
-  /** Full URL to the contributor's GitHub profile. */
-  github: string;
-  /** Short descriptive tags used for search/labels later. */
-  tags: string[];
 }
 
 export interface BackgroundProps {
   /**
-   * When false, animations are paused (used in the gallery grid until hover).
-   * When applied full-page it is always true. Static backgrounds ignore it.
+   * When false, animation is paused — the gallery does this until a card is
+   * hovered. Applied full-page it's always true; static backgrounds ignore it.
    */
   playing?: boolean;
   className?: string;
@@ -41,6 +33,6 @@ export interface BackgroundProps {
 export interface BackgroundModule {
   meta: BackgroundMeta;
   Background: ComponentType<BackgroundProps>;
-  /** The exact code the "Copy" button puts on the clipboard. */
+  /** The exact code the Copy button puts on the clipboard. */
   code: string;
 }

@@ -7,11 +7,7 @@ export const meta: BackgroundMeta = {
   name: "Blueprint Grid",
   category: "Patterns",
   tech: "css",
-  animated: false,
   isDark: false,
-  author: "your-username",
-  github: "https://github.com/your-username",
-  tags: ["grid", "light", "technical"],
 };
 
 export function Background({ className }: BackgroundProps) {

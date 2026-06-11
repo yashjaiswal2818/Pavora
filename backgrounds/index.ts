@@ -1,18 +1,8 @@
 import type { BackgroundModule, Category } from "./types";
 
-/* ============================================================================
-   REGISTRY — the single source of truth for every background on the site.
-
-   To add a background:
-     1. Create `backgrounds/<your-slug>.tsx` (copy `_template.tsx`).
-     2. Import it as a namespace and add it to the `modules` array below.
-
-        import * as auroraVeil from "./aurora-veil";
-        const modules = [auroraVeil, ...];
-
-   One import line + one array entry. Order here = order on the page within a
-   category. `_template.tsx` is intentionally NOT registered.
-============================================================================ */
+// The registry. To add a background: copy _template.tsx to backgrounds/<slug>.tsx,
+// import it here, and add it to `modules`. Order within a category is the order
+// it appears on the page.
 
 import * as sunsetDrift from "./sunset-drift";
 import * as peachyGlow from "./peachy-glow";
@@ -23,8 +13,6 @@ import * as blueprintGrid from "./blueprint-grid";
 import * as constellation from "./constellation";
 import * as starfield from "./starfield";
 
-// ── Registered backgrounds ──────────────────────────────────────────────────
-// Order within a category = order on the page.
 const modules: BackgroundModule[] = [
   sunsetDrift,
   peachyGlow,

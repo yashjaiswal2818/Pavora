@@ -15,9 +15,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { CodeBlock } from "@/components/ui/code-block";
 import { copyCode } from "@/lib/copy";
-import { CopyIcon } from "./icons";
 
 interface CodeDialogContextValue {
   /** Open the code viewer for a background module. */
@@ -46,29 +45,19 @@ export function CodeDialogProvider({ children }: { children: ReactNode }) {
         <DialogContent className="gap-0 overflow-hidden p-0 sm:max-w-2xl">
           {active && (
             <>
-              <DialogHeader className="flex-row items-center justify-between gap-4 space-y-0 border-b border-border px-5 py-4 pr-14 text-left">
-                <div className="min-w-0">
-                  <DialogTitle>{active.meta.name}</DialogTitle>
-                  <DialogDescription className="mt-1 truncate">
-                    {active.meta.tech === "css" ? "CSS" : "JavaScript"}
-                    {active.meta.animated ? " · animated" : ""} · by{" "}
-                    {active.meta.author}
-                  </DialogDescription>
-                </div>
-                <Button
-                  size="sm"
-                  onClick={() => copyCode(active.code)}
-                  className="shrink-0"
-                >
-                  <CopyIcon />
-                  Copy
-                </Button>
+              <DialogHeader className="px-5 py-4 pr-14 text-left">
+                <DialogTitle>{active.meta.name}</DialogTitle>
+                <DialogDescription className="mt-1 truncate">
+                  {active.meta.category}
+                </DialogDescription>
               </DialogHeader>
-              <pre className="m-0 max-h-[60vh] overflow-auto bg-muted px-5 py-4 text-[13px] leading-relaxed">
-                <code className="font-mono text-popover-foreground">
-                  {active.code}
-                </code>
-              </pre>
+              <div className="px-3 pb-3">
+                <CodeBlock
+                  code={active.code}
+                  onCopy={(code) => copyCode(code)}
+                  preClassName="max-h-[60vh]"
+                />
+              </div>
             </>
           )}
         </DialogContent>

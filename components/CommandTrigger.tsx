@@ -3,15 +3,15 @@
 import { SearchIcon } from "lucide-react";
 
 /**
- * The nav's search affordance. Dispatches the same window event the
- * CommandPalette listens for, so the two stay decoupled.
+ * Search affordance. Dispatches the window event the CommandPalette listens
+ * for, so the two stay decoupled.
  */
 export function CommandTrigger() {
   return (
     <button
       type="button"
       className="cmd-trigger"
-      onClick={() => window.dispatchEvent(new Event("backdrop:command"))}
+      onClick={() => window.dispatchEvent(new Event("motif:command"))}
       aria-label="Search backgrounds (Command-K)"
     >
       <SearchIcon size={15} aria-hidden />

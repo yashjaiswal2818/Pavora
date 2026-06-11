@@ -7,11 +7,7 @@ export const meta: BackgroundMeta = {
   name: "Dot Matrix",
   category: "Patterns",
   tech: "css",
-  animated: false,
   isDark: false,
-  author: "your-username",
-  github: "https://github.com/your-username",
-  tags: ["dots", "light", "minimal"],
 };
 
 export function Background({ className }: BackgroundProps) {
