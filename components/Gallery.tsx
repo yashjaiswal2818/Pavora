@@ -4,6 +4,7 @@ import { useState } from "react";
 import { byCategory } from "@/backgrounds";
 import type { BackgroundModule } from "@/backgrounds/types";
 import { CategorySection } from "./CategorySection";
+import { CommandTrigger } from "./CommandTrigger";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 /**
@@ -36,6 +37,7 @@ export function Gallery() {
             ))}
           </TabsList>
         </Tabs>
+        <CommandTrigger />
       </div>
 
       {visible.map((group) => (
@@ -52,12 +54,53 @@ export function Gallery() {
           margin: clamp(1.5rem, 4vw, 2.5rem) auto 0;
           padding: 0 clamp(1rem, 4vw, 2rem);
           display: flex;
-          justify-content: center;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+        /* Raised-key 3D treatment: the list is a recessed tray, the active
+           tab a lifted key. Uses the sd-* overlay tokens so it stays legible
+           when a dark background is applied site-wide. */
+        .gallery__filter [data-slot="tabs-list"] {
+          height: auto;
+          padding: 6px;
+          gap: 5px;
+          background: var(--sd-muted);
+          border: 1px solid var(--sd-border);
+          box-shadow: inset 0 2px 6px oklch(0.21 0.02 256 / 0.08);
+        }
+        .gallery__filter [data-slot="tabs-trigger"] {
+          height: auto;
+          padding: 0.6rem 1.4rem;
+          font-size: 0.95rem;
+          transition: color 0.18s var(--ease-out-quart),
+            transform 0.18s var(--ease-out-quart),
+            box-shadow 0.18s var(--ease-out-quart);
+        }
+        .gallery__filter [data-slot="tabs-trigger"]:hover {
+          color: var(--sd-card-foreground);
+        }
+        .gallery__filter [data-slot="tabs-trigger"][data-state="active"] {
+          background: var(--sd-card);
+          color: var(--sd-card-foreground);
+          border-color: var(--sd-border);
+          transform: translateY(-1px);
+          box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.55),
+            0 3px 6px oklch(0.21 0.02 256 / 0.12),
+            0 8px 18px oklch(0.21 0.02 256 / 0.08);
         }
         @media (max-width: 520px) {
-          .gallery__filter {
-            justify-content: flex-start;
+          .gallery__filter [data-slot="tabs-list"] {
+            max-width: 100%;
             overflow-x: auto;
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .gallery__filter [data-slot="tabs-trigger"] {
+            transition: none;
+          }
+          .gallery__filter [data-slot="tabs-trigger"][data-state="active"] {
+            transform: none;
           }
         }
       `}</style>

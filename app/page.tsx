@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <Hero />
       <Gallery />
-      <footer className="footer">
+      <footer className="footer" id="about">
         <p>
           Open source and free to use.{" "}
           <a href={site.github} target="_blank" rel="noreferrer">

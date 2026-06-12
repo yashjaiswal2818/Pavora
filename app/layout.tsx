@@ -6,6 +6,7 @@ import { CodeDialogProvider } from "@/components/CodeDialog";
 import { SiteBackdrop } from "@/components/SiteBackdrop";
 import { PreviewBar } from "@/components/PreviewBar";
 import { CommandPalette } from "@/components/CommandPalette";
+import { Navbar } from "@/components/Navbar";
 import { Toaster } from "@/components/ui/sonner";
 
 const bricolage = Bricolage_Grotesque({
@@ -44,6 +45,7 @@ export default function RootLayout({
         <BackgroundProvider>
           <CodeDialogProvider>
             <SiteBackdrop />
+            <Navbar />
             <main>{children}</main>
             <PreviewBar />
             <CommandPalette />
