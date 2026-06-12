@@ -28,7 +28,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Motif — copy-paste UI backgrounds",
+  title: "Pavora — copy-paste UI backgrounds",
   description:
     "A free, open-source library of CSS and JS backgrounds. Preview any one across the whole page, then copy the code.",
 };

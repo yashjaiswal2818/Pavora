@@ -1,10 +1,10 @@
-# Motif
+# Pavora
 
 **Copy-paste UI backgrounds.** A free, open-source gallery of CSS and JS/canvas backgrounds for landing pages, portfolios, and apps. Preview any background across the *entire site* with one click, then copy the code and ship it.
 
-![Motif — copy-paste UI backgrounds](.github/screenshot.png)
+![Pavora — copy-paste UI backgrounds](.github/screenshot.png)
 
-## Why Motif
+## Why Pavora
 
 - **Feel it at full scale.** Click any card and the background applies to the whole page — you experience it as a real environment, not a thumbnail. Press `Esc` (or the floating bar) to come back.
 - **Copy in seconds.** Every background ships as a self-contained, paste-ready snippet — no imports, no setup.
@@ -14,8 +14,8 @@
 ## Run it locally
 
 ```bash
-git clone <repo-url>
-cd motif
+git clone https://github.com/yashjaiswal2818/Pavora.git
+cd Pavora
 npm install
 npm run dev
 ```

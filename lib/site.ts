@@ -1,5 +1,5 @@
 /** Site-wide constants, kept in one place. */
 export const site = {
-  name: "Motif",
-  github: "https://github.com/your-username/motif",
+  name: "Pavora",
+  github: "https://github.com/yashjaiswal2818/Pavora",
 } as const;

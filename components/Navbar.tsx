@@ -9,7 +9,6 @@ export function Navbar() {
   return (
     <header className="nav">
       <a className="nav__home" href="#top">
-        <span className="nav__chip" aria-hidden />
         <span className="nav__word">{site.name}</span>
       </a>
       <nav className="nav__links" aria-label="Site">
@@ -44,13 +43,7 @@ export function Navbar() {
           text-decoration: none;
           color: inherit;
         }
-        .nav__chip {
-          width: 28px;
-          height: 28px;
-          border-radius: 9px;
-          background: linear-gradient(135deg, var(--primary), var(--accent));
-          box-shadow: var(--shadow-card);
-        }
+       
         .nav__word {
           font-family: var(--font-display);
           font-weight: 800;
