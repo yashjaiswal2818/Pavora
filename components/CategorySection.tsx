@@ -6,7 +6,8 @@ import { BackgroundCard } from "./BackgroundCard";
 /**
  * A grid of background cards, optionally headed by a title + count.
  * The "All" tab renders one untitled section with every background; the
- * category tabs render one titled section each.
+ * category tabs render one titled section each. Colourways of a family each get
+ * their own card, so they're individually browsable, linkable, and copyable.
  */
 export function CategorySection({
   title,

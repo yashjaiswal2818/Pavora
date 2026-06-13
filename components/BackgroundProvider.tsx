@@ -19,18 +19,34 @@ interface BackgroundContextValue {
   reset: () => void;
   /** Apply a random background (excludes the current one). */
   surprise: () => void;
+  /** Live colour overrides for the applied background, keyed by prop. */
+  customColors: Record<string, string> | null;
+  /** Override one editable colour on the applied background. */
+  setCustomColor: (key: string, value: string) => void;
+  /** Drop all colour overrides, back to the chosen colourway. */
+  resetColors: () => void;
 }
 
 const BackgroundContext = createContext<BackgroundContextValue | null>(null);
 
 export function BackgroundProvider({ children }: { children: ReactNode }) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const [customColors, setCustomColors] = useState<Record<string, string> | null>(null);
 
   const setActive = useCallback((slug: string) => setActiveSlug(slug), []);
   const reset = useCallback(() => setActiveSlug(null), []);
   const surprise = useCallback(() => {
     setActiveSlug((current) => randomSlug(current) ?? current);
   }, []);
+  const setCustomColor = useCallback((key: string, value: string) => {
+    setCustomColors((prev) => ({ ...(prev ?? {}), [key]: value }));
+  }, []);
+  const resetColors = useCallback(() => setCustomColors(null), []);
+
+  // Switching (or clearing) the applied background drops any colour edits.
+  useEffect(() => {
+    setCustomColors(null);
+  }, [activeSlug]);
 
   // Auto-contrast: flip the site chrome to light while a dark background is applied.
   useEffect(() => {
@@ -54,7 +70,9 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
   }, [activeSlug, reset]);
 
   return (
-    <BackgroundContext.Provider value={{ activeSlug, setActive, reset, surprise }}>
+    <BackgroundContext.Provider
+      value={{ activeSlug, setActive, reset, surprise, customColors, setCustomColor, resetColors }}
+    >
       {children}
     </BackgroundContext.Provider>
   );

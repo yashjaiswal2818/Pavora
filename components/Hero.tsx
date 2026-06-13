@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import { backgrounds } from "@/backgrounds";
 import { SurpriseButton } from "./SurpriseButton";
+import { GithubButton } from "./GithubButton";
 
 export function Hero() {
   const count = backgrounds.length;
@@ -20,6 +23,7 @@ export function Hero() {
 
           <div className="hero__actions">
             <SurpriseButton />
+            <GithubButton />
             <span className="hero__pill">
               {count} background{count === 1 ? "" : "s"}
             </span>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { BackgroundModule } from "@/backgrounds/types";
 import { useBackground } from "./BackgroundProvider";
 import { useCodeDialog } from "./CodeDialog";
+import { useInView } from "./useInView";
 import {
   MinimalCard,
   MinimalCardMedia,
@@ -17,6 +18,9 @@ export function BackgroundCard({ module }: { module: BackgroundModule }) {
   const { setActive } = useBackground();
   const { openCode } = useCodeDialog();
   const [engaged, setEngaged] = useState(false);
+  // Mount the background only while the card is near the viewport, and animate
+  // it only while it's also hovered — so a gallery of hundreds stays light.
+  const { ref: inViewRef, inView } = useInView<HTMLButtonElement>();
 
   return (
     <MinimalCard
@@ -30,12 +34,13 @@ export function BackgroundCard({ module }: { module: BackgroundModule }) {
     >
       <MinimalCardMedia className="card__media aspect-[4/3]">
         <button
+          ref={inViewRef}
           type="button"
           className="card__preview"
           onClick={() => setActive(meta.slug)}
           aria-label={`Preview ${meta.name} across the whole page`}
         >
-          <Background playing={engaged} />
+          {inView ? <Background playing={engaged && inView} /> : null}
           <span className="card__hint">
             <EyeIcon />
             Preview

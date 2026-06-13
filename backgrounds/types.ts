@@ -36,3 +36,62 @@ export interface BackgroundModule {
   /** The exact code the Copy button puts on the clipboard. */
   code: string;
 }
+
+/**
+ * A curated colorway / configuration of a background family. The registry
+ * expands every variant into its own standalone BackgroundModule.
+ */
+export interface BackgroundVariant {
+  /** Short id, unique within the family, e.g. "ember". */
+  id: string;
+  /** Switcher label, e.g. "Ember". */
+  name: string;
+  isDark: boolean;
+  /** Props handed to the family's Background component and to `code()`. */
+  props: Record<string, unknown>;
+}
+
+/** One editable colour on a family, surfaced live in the customizer. */
+export interface FamilyControl {
+  /** Which prop on the variant this edits. */
+  key: string;
+  /** Label shown next to the colour picker. */
+  label: string;
+  /** How the prop is stored, so the picker can convert to/from hex. */
+  format: "hex" | "triplet";
+}
+
+/**
+ * A background family: one parametrised component plus several curated
+ * variants. One file → many gallery entries, so the catalog scales without one
+ * file per colorway. A plain BackgroundModule is just a family of one.
+ */
+export interface BackgroundFamily {
+  slug: string;
+  name: string;
+  category: Category;
+  tech: Tech;
+  Background: ComponentType<BackgroundProps & { variant?: BackgroundVariant }>;
+  variants: BackgroundVariant[];
+  /** Generates the paste-ready snippet for one variant. */
+  code: (variant: BackgroundVariant) => string;
+  /** Colours the customizer lets people edit live (omit for fixed families). */
+  controls?: FamilyControl[];
+}
+
+/** One selectable colorway inside a gallery family card. */
+export interface FamilyVariant {
+  label: string;
+  module: BackgroundModule;
+}
+
+/**
+ * What the gallery renders: one card per family, with a colorway switcher when
+ * it has more than one variant. Single backgrounds are a family of one.
+ */
+export interface GalleryFamily {
+  slug: string;
+  name: string;
+  category: Category;
+  variants: FamilyVariant[];
+}

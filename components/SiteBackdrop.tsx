@@ -1,22 +1,31 @@
 "use client";
 
-import { getBySlug } from "@/backgrounds";
+import { getBySlug, getFamilyForSlug } from "@/backgrounds";
 import { useBackground } from "./BackgroundProvider";
 
 /**
  * The full-viewport layer behind all page content. Paints the base background
  * by default and renders the active background (with a crossfade) when one is
- * applied site-wide. Purely decorative — never intercepts clicks.
+ * applied site-wide. When the active background is a family, it renders through
+ * the family component with any live colour edits merged in. Purely decorative.
  */
 export function SiteBackdrop() {
-  const { activeSlug } = useBackground();
+  const { activeSlug, customColors } = useBackground();
   const active = activeSlug ? getBySlug(activeSlug) : undefined;
+  const fam = activeSlug ? getFamilyForSlug(activeSlug) : undefined;
 
   return (
     <div className="site-backdrop" aria-hidden>
       {active ? (
         <div key={active.meta.slug} className="site-backdrop__layer">
-          <active.Background playing />
+          {fam ? (
+            <fam.family.Background
+              variant={{ ...fam.variant, props: { ...fam.variant.props, ...(customColors ?? {}) } }}
+              playing
+            />
+          ) : (
+            <active.Background playing />
+          )}
         </div>
       ) : null}
       <style>{`
