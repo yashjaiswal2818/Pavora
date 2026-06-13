@@ -6,22 +6,50 @@ import type { BackgroundModule, Category } from "./types";
 
 import * as sunsetDrift from "./sunset-drift";
 import * as peachyGlow from "./peachy-glow";
+import * as velvetGrain from "./velvet-grain";
+import * as risoSunset from "./riso-sunset";
+import * as eclipse from "./eclipse";
 import * as auroraVeil from "./aurora-veil";
 import * as cottonCandy from "./cotton-candy";
+import * as rawSilk from "./raw-silk";
+import * as lavaLamp from "./lava-lamp";
+import * as inkWash from "./ink-wash";
 import * as dotMatrix from "./dot-matrix";
 import * as blueprintGrid from "./blueprint-grid";
+import * as indigoTide from "./indigo-tide";
+import * as graphiteGrid from "./graphite-grid";
+import * as checkerFade from "./checker-fade";
 import * as constellation from "./constellation";
 import * as starfield from "./starfield";
+import * as fireflies from "./fireflies";
+import * as dustMotes from "./dust-motes";
+import * as wisp from "./wisp";
 
 const modules: BackgroundModule[] = [
+  // Gradients
   sunsetDrift,
   peachyGlow,
+  velvetGrain,
+  risoSunset,
+  eclipse,
+  // Mesh
   auroraVeil,
   cottonCandy,
+  rawSilk,
+  lavaLamp,
+  inkWash,
+  // Patterns
   dotMatrix,
   blueprintGrid,
+  indigoTide,
+  graphiteGrid,
+  checkerFade,
+  // Particles
   constellation,
   starfield,
+  fireflies,
+  dustMotes,
+  wisp,
 ];
 
 /** Every registered background, in declaration order. */
