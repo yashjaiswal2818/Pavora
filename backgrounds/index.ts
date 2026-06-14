@@ -17,6 +17,7 @@ import type {
 import * as peachyGlow from "./peachy-glow";
 import * as risoSunset from "./riso-sunset";
 import { family as eclipse } from "./eclipse";
+import { family as borealis } from "./borealis";
 import * as auroraVeil from "./aurora-veil";
 import * as cottonCandy from "./cotton-candy";
 import * as rawSilk from "./raw-silk";
@@ -70,6 +71,7 @@ const entries: Entry[] = [
   peachyGlow,
   risoSunset,
   eclipse,
+  borealis,
   abyss,
   limelight,
   nacre,
