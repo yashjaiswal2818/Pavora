@@ -18,7 +18,7 @@ import {
 /**
  * ⌘K / Ctrl+K command palette. Fuzzy-search every background and apply it
  * site-wide, or run a quick action. Opens on the keyboard shortcut or on a
- * `motif:command` window event (dispatched by the hero search button).
+ * `pavora:command` window event (dispatched by the hero search button).
  */
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
@@ -36,10 +36,10 @@ export function CommandPalette() {
       setOpen(true);
     }
     window.addEventListener("keydown", onKey);
-    window.addEventListener("motif:command", onOpenEvent);
+    window.addEventListener("pavora:command", onOpenEvent);
     return () => {
       window.removeEventListener("keydown", onKey);
-      window.removeEventListener("motif:command", onOpenEvent);
+      window.removeEventListener("pavora:command", onOpenEvent);
     };
   }, []);
 

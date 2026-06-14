@@ -5,7 +5,7 @@ import { Toaster as Sonner, type ToasterProps } from "sonner";
 
 /**
  * Themed Sonner Toaster. Unlike the stock shadcn version this does NOT depend on
- * next-themes — Motif flips its chrome via [data-theme="dark"], and the
+ * next-themes — Pavora flips its chrome via [data-theme="dark"], and the
  * `--sd-*` overlay tokens flip with it, so the toasts follow automatically.
  */
 function Toaster({ ...props }: ToasterProps) {

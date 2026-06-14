@@ -95,7 +95,7 @@
   --color-primary-hover: var(--primary-hover);
   --color-primary-ink: var(--primary-ink);
   /* NB: --color-border / --color-muted / --color-accent are defined further
-     down with shadcn semantics. Motif's own coral + muted-text live on the
+     down with shadcn semantics. Pavora's own coral + muted-text live on the
      bare --accent / --muted custom properties, consumed via inline styles. */
 
   --color-chrome-ink: var(--chrome-ink);
@@ -113,7 +113,7 @@
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
-  /* shadcn color tokens → Motif palette (see the bridge note in :root). */
+  /* shadcn color tokens → Pavora palette (see the bridge note in :root). */
   --color-background: var(--bg);
   --color-foreground: var(--ink);
   --color-card: var(--sd-card);

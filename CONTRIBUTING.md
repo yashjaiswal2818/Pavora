@@ -26,8 +26,8 @@ The site renders straight from `backgrounds/index.ts`, so a new background is a 
 ### 1. Set up
 
 ```bash
-git clone https://github.com/<you>/motif
-cd motif
+git clone https://github.com/<you>/Pavora
+cd Pavora
 npm install
 npm run dev        # http://localhost:3000
 ```

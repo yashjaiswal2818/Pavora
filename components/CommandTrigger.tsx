@@ -11,7 +11,7 @@ export function CommandTrigger() {
     <button
       type="button"
       className="cmd-trigger"
-      onClick={() => window.dispatchEvent(new Event("motif:command"))}
+      onClick={() => window.dispatchEvent(new Event("pavora:command"))}
       aria-label="Search backgrounds (Command-K)"
     >
       <SearchIcon size={15} aria-hidden />

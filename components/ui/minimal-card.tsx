@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 /* Adapted from cult-ui's MinimalCard (https://cult-ui.com/docs/components/minimal-card),
-   re-themed onto Motif's FIXED card tokens (--surface/--border/--radius-lg) — gallery
+   re-themed onto Pavora's FIXED card tokens (--surface/--border/--radius-lg) — gallery
    tiles must stay light even when a dark background is applied site-wide, so no --sd-*
    utilities here. The signature look: a padded outer card with an inset, hairline-framed
    media area. */
@@ -22,7 +22,7 @@ function MinimalCard({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-/* Generic framed media slot — children fill it (Motif puts live <Background>
+/* Generic framed media slot — children fill it (Pavora puts live <Background>
    previews here). 20px outer radius − 8px padding = 12px, so the frame stays
    concentric with the card. */
 function MinimalCardMedia({ className, ...props }: React.ComponentProps<"div">) {
