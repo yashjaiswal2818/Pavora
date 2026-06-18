@@ -58,8 +58,12 @@ import { family as halo } from "./halo";
 import { family as beam } from "./beam";
 import { family as spotlightGrid } from "./spotlight-grid";
 import { family as grid } from "./grid";
+import { family as shapeGrid } from "./shape-grid";
 import { family as dotGrid } from "./dot-grid";
 import { family as spotlight } from "./spotlight";
+import { family as horizon } from "./horizon";
+import { family as filament } from "./filament";
+import { family as dither } from "./dither";
 import { family as metaballs } from "./metaballs";
 import { family as fountain } from "./fountain";
 
@@ -79,6 +83,7 @@ const entries: Entry[] = [
   glacier,
   halo,
   beam,
+  dither,
   // Mesh
   auroraVeil,
   cottonCandy,
@@ -98,8 +103,10 @@ const entries: Entry[] = [
   terrazzo,
   spotlightGrid,
   grid,
+  shapeGrid,
   dotGrid,
   spotlight,
+  horizon,
   // Particles
   constellation,
   starfield,
@@ -112,6 +119,7 @@ const entries: Entry[] = [
   bubbles,
   meteors,
   fountain,
+  filament,
 ];
 
 function isFamily(entry: Entry): entry is BackgroundFamily {
