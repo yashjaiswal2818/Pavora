@@ -64,8 +64,10 @@ import { family as spotlight } from "./spotlight";
 import { family as horizon } from "./horizon";
 import { family as filament } from "./filament";
 import { family as dither } from "./dither";
+import { family as swell } from "./swell";
+import { family as orbit } from "./orbit";
+import { family as warp } from "./warp";
 import { family as metaballs } from "./metaballs";
-import { family as fountain } from "./fountain";
 
 /** A registry entry is either a single background module or a family. */
 type Entry = BackgroundModule | BackgroundFamily;
@@ -107,6 +109,8 @@ const entries: Entry[] = [
   dotGrid,
   spotlight,
   horizon,
+  swell,
+  warp,
   // Particles
   constellation,
   starfield,
@@ -118,8 +122,8 @@ const entries: Entry[] = [
   bokeh,
   bubbles,
   meteors,
-  fountain,
   filament,
+  orbit,
 ];
 
 function isFamily(entry: Entry): entry is BackgroundFamily {
